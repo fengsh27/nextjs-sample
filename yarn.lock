@@ -1387,6 +1387,11 @@ internal-slot@^1.0.5:
     has "^1.0.3"
     side-channel "^1.0.4"
 
+iron-session@8.0.0-alpha.0:
+  version "8.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/iron-session/-/iron-session-8.0.0-alpha.0.tgz#e58f6f5269107a19112d038f8aba64b66f2eaa14"
+  integrity sha512-ch+DuhMMUqu5sELe5/bxOZi/j1gzTD3wmbqfOscpdzcTEnxsuB/WzzQL0es4/dSEUdoFB/XLcE0jORvb90MVvQ==
+
 is-array-buffer@^3.0.1, is-array-buffer@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/is-array-buffer/-/is-array-buffer-3.0.2.tgz#f2653ced8412081638ecb0ebbd0c41c6e0aecbbe"

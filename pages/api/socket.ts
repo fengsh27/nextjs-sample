@@ -1,6 +1,10 @@
-import { Server } from 'socket.io'
 
-const SocketHandler = (req: any, res: any/*NextApiResponseWithSocket*/) => {
+
+import { Server } from 'socket.io'
+// import { withIronSessionApiRoute } from "iron-session/";
+import { getSessionManager } from "@/app/libs/session-manager";
+
+const SocketHandler = (req: any, res: any) => {
   if (res.socket.server.io) {
     console.log('[socket] is already running')
   } else {
