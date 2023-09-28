@@ -23,7 +23,7 @@ export default function SessionInput() {
     );
   });
   function handleChange() {
-    fetch('/api/socket')
+    fetch('/api/allRecords')
   }
 
   return (

@@ -21,7 +21,9 @@ const SocketHandler = (req: any, res: any) => {
         socket.broadcast.emit('[socket] update-input', msg)
       })
       socket.on('disconnect', () => {
-        console.log('[socket] disconnected');
+        const ck = req.cookies;
+        console.log("[socket] disconnected");
+        console.dir(ck);
       });
     })
   }
