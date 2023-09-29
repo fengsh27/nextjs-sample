@@ -12,7 +12,6 @@ export interface SessionData {
 }
 
 export class SessionManager {
-  idDict: Dict<SessionData>;
   maxAge: number; // in seconds
   db: any;
   dbFile: string;
@@ -24,7 +23,6 @@ export class SessionManager {
     tableName?: string,
     maxAge?: number
   ) {
-    this.idDict = {};
     this.maxAge = maxAge ?? 7200; // 3 days
     this.dbFile = dbFile ?? "./tmp/sessions.db";
     this.tableName = tableName ?? "sessions"
@@ -115,7 +113,9 @@ export class SessionManager {
 let sessionMgr: SessionManager | undefined;
 export const getSessionManager = (dbFile?: string, tableName?: string) => {
   if (sessionMgr === undefined) {
-    sessionMgr = new SessionManager(dbFile, tableName);
+    const fn = dbFile ?? process.env.SQLITE_DATABASE;
+    const tn = tableName ?? process.env.SQLITE_TABLE;
+    sessionMgr = new SessionManager(fn, tn);
   }
   return sessionMgr;
 };

@@ -1,6 +1,11 @@
 import Image from 'next/image'
 import SesssionInput from "./components/session-input";
-export default function Home() {
+import { getSessionManager } from "./libs/session-manager";
+export default async function Home() {
+
+  const sessionMgr = getSessionManager();
+  await sessionMgr.initialize();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <SesssionInput />
