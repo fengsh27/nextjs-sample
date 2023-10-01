@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 import { getSessionStore } from "./dataprovider/session-store";
+import { SESSION_ID } from "./dataprovider/datatypes";
 
 let socket: any | undefined;
 
@@ -24,29 +25,9 @@ const handleResponseMessage = (socket: any, message: {name: string, value?: any}
 
 export default function SessionWidget() {
 
-  async function initialize_socket() {
-    await fetch('/api/socket');
-    socket = io({
-      path: '/api/socket'
-    });
-    socket.on('connect', () => {
-      console.log('[socket] connected');
-      socket.emit('request', {
-        name: 'generate-id'
-      });
-      socket.on('response', (msg:any) => (
-        console.dir(msg)
-      ));
-    });
-  }
+  
   useEffect(() => {
-    initialize_socket();
-
     return () => {
-      const sessionStore = getSessionStore();
-      const id = sessionStore.sessionId;
-      socket.emit('request', {name: "destroy-id", value: id});
-      socket?.close();
     };
   });
   function handleChange() {

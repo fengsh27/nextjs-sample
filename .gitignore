@@ -36,3 +36,7 @@ next-env.d.ts
 
 # vscode
 .vscode
+
+# custom
+tmp/
+*.bak
