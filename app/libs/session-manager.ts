@@ -57,6 +57,7 @@ export class SessionManager {
   }
   async add_id(id: string) {
     const now = Date.now();
+    console.log(`[test] add_id at ${now}`);
     try {
       await this.db.run(
         `insert into ${this.tableName} (id, createdDate, refreshedDate, maxAge) values (:id, :cr, :ref, :max);`, {
@@ -80,7 +81,7 @@ export class SessionManager {
   }
   async refresh_id(id: string) {
     const now = Date.now();
-    console.log(`refreshed at: ${now}`);
+    console.log(`[test] refresh_id at: ${now}`);
     try {
       await this.db.run(`update ${this.tableName} set refreshedDate = ? where id = ?`, now, id);
       // await this.db.
@@ -111,14 +112,16 @@ export class SessionManager {
 }
 
 let sessionMgr: SessionManager | undefined;
-export const getSessionManager = (dbFile?: string, tableName?: string) => {
-  if (sessionMgr === undefined) {
+export const getSessionManager = async (dbFile?: string, tableName?: string) => {
+  if (!sessionMgr) {
     const fn = dbFile ?? process.env.SQLITE_DATABASE;
     const tn = tableName ?? process.env.SQLITE_TABLE;
-    sessionMgr = new SessionManager(fn, tn);
+    const theSessionMgr = new SessionManager(fn, tn);
+    await theSessionMgr.initialize();
+    sessionMgr = theSessionMgr;
   }
   return sessionMgr;
-};
+}
 
 export const generateRandomId = () => (
   randomBytes(16).toString("hex")

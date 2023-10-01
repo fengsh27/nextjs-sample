@@ -22,7 +22,8 @@ export const getHistory = async() => {
   const id = await getSessionId();
   const response = await axios.get('/api/history', {
     headers: {
-      Authorization: ""
+      Authorization: id
     }
-  })
+  });
+  return response;
 };

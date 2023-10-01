@@ -1,5 +1,5 @@
 
-import { getSessionManager, SessionManager } from "../session-manager";
+import  { getSessionManager, SessionManager } from "../session-manager";
 
 function sleep(ms: number) {
   return new Promise((resolve) => {
@@ -37,6 +37,7 @@ describe("SessionManager", () => {
     await db!.add_id("123");
     const exists = await db?.has_id('123');
     const now = Date.now();
+    await sleep(50);
     expect(exists);
     await db!.refresh_id("123");
     const result = await db!.get_session("123");
