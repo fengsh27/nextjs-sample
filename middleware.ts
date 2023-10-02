@@ -34,6 +34,14 @@ export async function middleware(request: NextRequest) {
   // });
   // session.session_id = "balahbalah";
   // session.save();
+
+  const auth = request.headers.get("Authorization");
+  if (!auth) {
+    return Response.json(
+      { success: false, message: 'authentication failed' },
+      { status: 401 }
+    )
+  }
   return response;
 }
 
