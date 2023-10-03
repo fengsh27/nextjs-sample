@@ -14,16 +14,26 @@ export const getSessionId = async () => {
   return the_id;
 };
 export const requestSessionId = async () => {
-  const respose = await axios.get('/api/sessionId');
-  return respose;
+  try {
+    const respose = await axios.get('/api/sessionId');
+    return respose;
+  } catch (e: any) {
+    console.log(e);
+    throw e;
+  }
 };
 
 export const getHistory = async() => {
-  const id = await getSessionId();
-  const response = await axios.get('/api/history', {
-    headers: {
-      Authorization: id
-    }
-  });
-  return response;
+  try {
+    const id = await getSessionId();
+    const response = await axios.get('/api/history', {
+      headers: {
+        Authorization: id,
+      }
+    });
+    return response;
+  } catch (e: any) {
+    console.log(e);
+    throw e;
+  }
 };

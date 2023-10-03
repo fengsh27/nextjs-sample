@@ -33,6 +33,7 @@ export class SessionManager {
   }
 
   async _initialize_session_db() {
+    console.log("[fengsh] Initializing Session Manager ...");
     try {
       this.db = await open({
         filename: this.dbFile,
@@ -116,9 +117,8 @@ export const getSessionManager = async (dbFile?: string, tableName?: string) => 
   if (!sessionMgr) {
     const fn = dbFile ?? process.env.SQLITE_DATABASE;
     const tn = tableName ?? process.env.SQLITE_TABLE;
-    const theSessionMgr = new SessionManager(fn, tn);
-    await theSessionMgr.initialize();
-    sessionMgr = theSessionMgr;
+    const sessionMgr = new SessionManager(fn, tn);
+    await sessionMgr.initialize();
   }
   return sessionMgr;
 }
